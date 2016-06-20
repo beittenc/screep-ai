@@ -11,8 +11,11 @@
     "url": "git://github.com/beittenc/screep-ai.git"
   },
   "author": "Nathan Beittenmiller",
-  "license": "BSD-2-Clause",
-  "bugs": {
+  "license": "",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-screeps": "^1.0.3"
+  }  "bugs": {
     "url": "https://github.com/beittenc/screep-ai/issues"
   }
 }
