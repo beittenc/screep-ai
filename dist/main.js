@@ -1,8 +1,9 @@
 //var roleHarvester = require('role.harvester');
-var roleMule = require('role.mule');
-var roleUpgrader = require('role.upgrader');
+//var roleMule = require('role.mule');
+//var roleUpgrader = require('role.upgrader');
 
-//var HarvesterCreep = require('class.harvester');
+var HarvesterCreep = require('class.harvester');
+var UpgraderCreep = require('class.upgrader');
 
 module.exports.loop = function () {
 
@@ -13,7 +14,7 @@ module.exports.loop = function () {
     }
 
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
-    var mules = _.filter(Game.creeps, (creep) => creep.memory.role == 'mule');
+//    var mules = _.filter(Game.creeps, (creep) => creep.memory.role == 'mule');
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 
 //    console.log('Harvesters: ' + harvesters.length);
@@ -26,9 +27,9 @@ module.exports.loop = function () {
     //     var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], undefined, {role: 'mule'});
     // }
 
-   if(upgraders.length < 1) {
-       var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
-   }
+    if(upgraders.length < 1) {
+	var newName = Game.spawns.Spawn1.createCreep([WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
+    }
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
@@ -36,14 +37,18 @@ module.exports.loop = function () {
 
         if(creep.memory.role == 'harvester') {
 //            roleHarvester.run(creep, sources[0]);
-	    var newHarvester = new HarvesterCreep(creep);
-	    newHarvester.run();
+	    var newCreep = new HarvesterCreep(creep);
+	    newCreep.setTarget(sources[0]);
+	    newCreep.run();
         }
-        if(creep.memory.role == 'mule') {
-            roleMule.run(creep, sources[0]);
-        }
+        // if(creep.memory.role == 'mule') {
+        //     roleMule.run(creep, sources[0]);
+        // }
         if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
+//            roleUpgrader.run(creep);
+	    var newCreep = new UpgraderCreep(creep);
+	    newCreep.setTarget(sources[0]);
+	    newCreep.run();
         }
     }
 }
